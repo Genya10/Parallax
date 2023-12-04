@@ -7,6 +7,7 @@
     --black:#141414;
     --index:calc(1vw + 1vh);
     --transition: 1.2s cubic-bezier(.2,.5,0,1);
+    --transition-cursor: 2s cubic-bezier(.05, .5, 0, 1);
 }
 @font-face {
     font-family: arsenal_f,sans-serif;
@@ -59,13 +60,27 @@ body{
     --height:calc(var(--index)*14);
     position:fixed;
     width: var(--width);
-    height: var(--height);
-    top: 0;
-    left: 0;
+    height: 0;
+       height: var(--height);
+    top: calc(var(--height)*-.5);
+    left: calc(var(--width)*-.5);
     overflow: hidden;
+    transform: translate3d(var(--move-x), var(--move-y),0);
+    transition: transform var(--transition-cursor), height 1s ease;
+    z-index: -1;
+    will-change: transform;  
 }
 .cursor_image{
     position: relative;
     width: calc(var(--width)*2);
     height: calc(var(--height)*2);
+    top: calc(var(--height)*-.25);
+    left: calc(var(--width)*-.4);
+    background-size: cover;
+    background-position: center;
+    transform: translate3d(calc(var(--move-x)/-5,var(--move-y)/-5),0);
+    transition:transform var(--transition-cursor);
+}
+.magic-list_item:hover .cursor{
+    height: var(--height);
 }
